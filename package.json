@@ -1,0 +1,19 @@
+{
+  "name": "liri-node-app",
+  "version": "1.0.0",
+  "description": "Week 10 Homework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salemgrace/liri-node-app.git"
+  },
+  "author": "salemgrace",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/salemgrace/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/salemgrace/liri-node-app#readme"
+}
