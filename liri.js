@@ -1,27 +1,37 @@
+// Info for Spotify
 require("dotenv").config();
-
 var Spotify = require("node-spotify-api");
-
 var keys = require("./keys.js");
-
 var spotify = new Spotify(keys.spotify);
 
+// Info for Request
 var request = require("request");
 
+// Info for Moment -- Date Formatting
 var moment = require("moment");
-moment().format();
 
-
-
+// Takes command
 var command = process.argv[2];
 
 
+    // IF you want to know about a CONCERT
 if (command === "concert-this") {
-    
+
     var artist = process.argv[3];
 
-    console.log("Command: ", command, ", Artist Name: ", artist);
+    request("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp", function (error, response, body) {
 
+        if (!error && response.statusCode === 200) {
+            console.log("-------------------------------------");
+            console.log("Venue: " + JSON.parse(body)[0].venue.name);
+            console.log("Location: " + JSON.parse(body)[0].venue.city + " " + JSON.parse(body)[0].venue.region);
+            console.log("Date: " + moment(JSON.parse(body)[0].datetime).format("MM/DD/YYYY"));
+            console.log("-------------------------------------");
+        }
+    });
+
+
+    // IF you want to know about a SONG
 } else if (command === "spotify-this-song") {
     var song = process.argv[3];
 
@@ -29,19 +39,22 @@ if (command === "concert-this") {
         song = "The Sign";
     }
 
-    spotify.search({type: "track", query: song}, function(err, data) {
+    spotify.search({ type: "track", query: song }, function (err, data) {
         if (err) {
             return console.log("Error occured: " + err);
-        } 
+        }
         console.log(data);
+        console.log("-------------------------------------");
         console.log("Command: ", command, ", Song Name: ", song);
         console.log("Artist: " + data.artist);
         console.log("Song Name: " + data);
         console.log("Preview Link: " + data.tracks.href);
         console.log("Album: " + data.album);
+        console.log("-------------------------------------");
     });
 
 
+    // IF you want to know about a MOVIE
 } else if (command === "movie-this") {
 
     var movie = process.argv[3];
@@ -50,28 +63,33 @@ if (command === "concert-this") {
         movie = "Mr. Nobody";
     }
 
-    request("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
+    request("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy", function (error, response, body) {
 
-      if (!error && response.statusCode === 200) {
+        if (!error && response.statusCode === 200) {
 
-        // Then we print out the imdbRating
-        console.log("Title: " + JSON.parse(body).Title);
-        console.log("Year Released: " + JSON.parse(body).Year);
-        console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-        console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-        console.log("Country Produced: " + JSON.parse(body).Country);
-        console.log("Language: " + JSON.parse(body).Language);
-        console.log("Plot: " + JSON.parse(body).Plot);
-        console.log("Actors: " + JSON.parse(body).Actors);
-  }
+            // Information about Movie
+            console.log("-------------------------------------");
+            console.log("Title: " + JSON.parse(body).Title);
+            console.log("Year Released: " + JSON.parse(body).Year);
+            console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+            console.log("Country Produced: " + JSON.parse(body).Country);
+            console.log("Language: " + JSON.parse(body).Language);
+            console.log("Plot: " + JSON.parse(body).Plot);
+            console.log("Actors: " + JSON.parse(body).Actors);
+            console.log("-------------------------------------");
+        }
     });
 
+    // WILDCARD
 } else if (command === "do-what-it-says") {
-    
-    
-    console.log("Command: ", command);
 
+    console.log("-------------------------------------");
+    console.log("Command: ", command);
+    console.log("-------------------------------------");
+
+
+    // IF Command not entered or incorrectly entered
 } else {
-    
     console.log("Command Error");
 }
