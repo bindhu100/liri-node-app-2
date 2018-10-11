@@ -10,11 +10,14 @@ var request = require("request");
 // Info for Moment -- Date Formatting
 var moment = require("moment");
 
+// Info for fs
+var fs = require("fs");
+
 // Takes command
 var command = process.argv[2];
 
 
-    // IF you want to know about a CONCERT
+// IF you want to know about a CONCERT
 if (command === "concert-this") {
 
     var artist = process.argv[3];
@@ -31,11 +34,11 @@ if (command === "concert-this") {
     });
 
 
-    // IF you want to know about a SONG
+// IF you want to know about a SONG
 } else if (command === "spotify-this-song") {
     var song = process.argv[3];
 
-    if (process.argv[3] !== 'undefined') {
+    if (song === undefined) {
         song = "The Sign";
     }
 
@@ -44,22 +47,22 @@ if (command === "concert-this") {
             return console.log("Error occured: " + err);
         }
         console.log(data);
-        console.log("-------------------------------------");
-        console.log("Command: ", command, ", Song Name: ", song);
-        console.log("Artist: " + data.artist);
-        console.log("Song Name: " + data);
-        console.log("Preview Link: " + data.tracks.href);
-        console.log("Album: " + data.album);
-        console.log("-------------------------------------");
+        // console.log("-------------------------------------");
+        // console.log("Command: ", command, ", Song Name: ", song);
+        // console.log("Artist: " + data);
+        // console.log("Song Name: " + data);
+        // console.log("Preview Link: " + data);
+        // console.log("Album: " + data);
+        // console.log("-------------------------------------");
     });
 
 
-    // IF you want to know about a MOVIE
+// IF you want to know about a MOVIE
 } else if (command === "movie-this") {
 
     var movie = process.argv[3];
 
-    if (process.argv[3] !== 'undefined') {
+    if (movie === undefined) {
         movie = "Mr. Nobody";
     }
 
@@ -81,15 +84,26 @@ if (command === "concert-this") {
         }
     });
 
-    // WILDCARD
+// WILDCARD
 } else if (command === "do-what-it-says") {
 
-    console.log("-------------------------------------");
-    console.log("Command: ", command);
-    console.log("-------------------------------------");
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        
+        if (error) {
+            return console.log(error);
+          }
+              
+            console.log(data);
+            var dataArr = data.split(",");
+            console.log(dataArr);
+
+            console.log("-------------------------------------");
+            console.log("Command: ", command);
+            console.log("-------------------------------------");
+    });
 
 
-    // IF Command not entered or incorrectly entered
+// IF Command not entered or incorrectly entered
 } else {
     console.log("Command Error");
 }
