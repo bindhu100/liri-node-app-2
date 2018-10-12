@@ -39,7 +39,7 @@ if (command === "concert-this") {
     var song = process.argv[3];
 
     if (song === undefined) {
-        song = "What Makes You Beautiful";
+        song = "The Sign";
     }
 
     spotify.search({ type: "track", query: song }, function (err, data) {
@@ -48,10 +48,10 @@ if (command === "concert-this") {
         }
         // console.log(data.tracks.items[0]);
         console.log("-------------------------------------");
-        // console.log("Artist: " + data.tracks.items[0].album.artists.name);
-        // console.log("Song Name: " + data.tracks.items[0].name);
-        // console.log("Preview Link: " + data.tracks.items[0].preview_url);
-        console.log("Album: " + data);
+        console.log("Artist: " + data.tracks.items[0].artists.name);
+        console.log("Song Name: " + data.tracks.items[0].name);
+        console.log("Preview Link: " + data.tracks.items[0].preview_url);
+        console.log("Album: " + data.tracks.items[0].album.name);
         console.log("-------------------------------------");
     });
 
