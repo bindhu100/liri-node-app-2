@@ -13,6 +13,7 @@ var moment = require("moment");
 // Info for fs
 var fs = require("fs");
 
+
 // Takes command
 var command = process.argv[2];
 
@@ -42,7 +43,10 @@ if (command === "concert-this") {
         song = "The Sign";
     }
 
-    spotify.search({ type: "track", query: song }, function (err, data) {
+    spotify.search({
+        type: "track",
+        query: song
+    }, function (err, data) {
         if (err) {
             return console.log("Error occured: " + err);
         }
@@ -123,7 +127,10 @@ if (command === "concert-this") {
                 song = "The Sign";
             }
 
-            spotify.search({ type: "track", query: song }, function (err, data) {
+            spotify.search({
+                type: "track",
+                query: song
+            }, function (err, data) {
                 if (err) {
                     return console.log("Error occured: " + err);
                 }
