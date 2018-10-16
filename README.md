@@ -22,7 +22,7 @@ This app can take in one of the following commands:
      * Venue location
      * Date of the Event (use moment to format this as "MM/DD/YYYY")
 
-EXAMPLE: ![Concert Example](/images/Concert-This-ScreenShot.png)
+EXAMPLE: ![Concert Example](/images/Concert-This-ScreenShot-01.png)
 
 
 2. `node liri.js spotify-this-song '<song name here>'`
@@ -33,6 +33,8 @@ EXAMPLE: ![Concert Example](/images/Concert-This-ScreenShot.png)
      * The album that the song is from
 
    *If no song is provided then your program will default to "The Sign" by Ace of Base.*
+
+EXAMPLE: ![Song Example](/images/Spotify-This-Song-ScreenShot-01.png)
 
 
 3. `node liri.js movie-this '<movie name here>'`
@@ -47,6 +49,8 @@ EXAMPLE: ![Concert Example](/images/Concert-This-ScreenShot.png)
      * Actors in the movie.
 
    *If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'*
+
+EXAMPLE: ![Movie Example](/images/Movie-This-ScreenShot-01.png)
 
 
 4. `node liri.js do-what-it-says`
