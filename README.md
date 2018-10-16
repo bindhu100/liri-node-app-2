@@ -22,6 +22,8 @@ This app can take in one of the following commands:
      * Venue location
      * Date of the Event (use moment to format this as "MM/DD/YYYY")
 
+EXAMPLE: ![Concert Example](/images/Concert-This-ScreenShot.png)
+
 
 2. `node liri.js spotify-this-song '<song name here>'`
 
